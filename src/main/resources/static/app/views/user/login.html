@@ -1,0 +1,57 @@
+<!--<div class="col-md-12">-->
+    <!--<div class="col-md-4"></div>-->
+
+    <!--<div class="col-md-4">-->
+
+        <!--<div class="panel panel-default">-->
+            <!--<div class="panel-heading">Zaloguj się</div>-->
+            <!--<div class="panel-body">-->
+                <!--<form>-->
+                    <!--<div class="form-group"-->
+                         <!--ng-class="{'has-error is-focused' : authenticationError}">-->
+                        <!--<input id="login" ng-model="username" type="text" class="form-control"-->
+                               <!--required="required" placeholder="login"/>-->
+                        <!--<span ng-show="authenticationError" class="help-block">-->
+            <!--Please check your credentials and try again.-->
+        <!--</span>-->
+                    <!--</div>-->
+
+                    <!--<div class="form-group">-->
+                        <!--<input id="password" ng-model="password" type="password" class="form-control"-->
+                               <!--required="required" placeholder="password"/>-->
+                    <!--</div>-->
+                    <!--<button class="btn btn-default" ng-click="login()">Login</button>-->
+                <!--</form>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="col-md-4"></div>-->
+<!--</div>-->
+<div class="col-md-12">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <form class="form-horizontal">
+            <fieldset>
+                <legend>Sign In</legend>
+                <div class="form-group">
+                    <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                    <div class="col-lg-10">
+                        <input class="form-control" id="inputEmail" placeholder="Email" type="text" ng-model="username">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+                    <div class="col-lg-10">
+                        <input class="form-control" id="inputPassword" placeholder="Password" type="password" ng-model="password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <button type="submit" class="btn btn-primary" ng-click="login()">Sign In</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div class="col-md-3"></div>
+</div>
