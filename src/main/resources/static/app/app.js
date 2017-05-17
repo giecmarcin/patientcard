@@ -1,4 +1,8 @@
-var app = angular.module('app', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngStorage']);
+var app = angular.module('app', ['ngRoute',
+    'ngResource',
+    'ui.bootstrap',
+    'ngStorage',
+    'chart.js']);
 
 app.config(function($routeProvider) {
     $routeProvider
@@ -13,6 +17,26 @@ app.config(function($routeProvider) {
         .when('/doctors/add', {
             templateUrl: '/app/views/doctor/add.html',
             controller: 'DoctorsController'
+        })
+        .when('/nurses', {
+            templateUrl: '/app/views/nurse/nurses.html',
+            controller: 'NurseController'
+        })
+        .when('/nurses/add', {
+            templateUrl: '/app/views/nurse/add.html',
+            controller: 'NurseController'
+        })
+        .when('/patients', {
+            templateUrl: '/app/views/patient/patients.html',
+            controller: 'PatientsController'
+        })
+        .when('/patients/add', {
+            templateUrl: '/app/views/patient/add.html',
+            controller: 'PatientsController'
+        })
+        .when('/patients/details/:id', {
+            templateUrl: '/app/views/patient/details.html',
+            controller: 'DetailsController'
         })
         .otherwise({
             redirectTo: '/'

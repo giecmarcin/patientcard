@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,6 +25,9 @@ public class DoctorService {
     }
 
     public List<Doctor> findAll(){
-        return doctorRepository.findAll();
+        Iterable<Doctor> source = doctorRepository.findAll();
+        List<Doctor> doctors = new ArrayList<>();
+        source.forEach(doctors::add);
+        return doctors;
     }
 }

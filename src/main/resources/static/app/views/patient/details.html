@@ -1,0 +1,61 @@
+<div class="col-md-12">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="!#home" aria-controls="home" role="tab"
+                                                  data-toggle="tab">Details</a></li>
+        <li role="presentation"><a href="!#observations" aria-controls="observations" role="tab"
+                                   data-toggle="tab">Observations</a></li>
+        <li role="presentation"><a href="!#medicines" aria-controls="medicines" role="tab"
+                                   data-toggle="tab">Medicines</a></li>
+        <li role="presentation"><a href="!#temperature" aria-controls="temperature" role="tab"
+                                   data-toggle="tab">Temperature</a></li>
+        <li role="presentation"><a href="!#pressure" aria-controls="pressure" role="tab"
+                                   data-toggle="tab">Pressure</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="home">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    Details
+                </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="observations">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    Observations
+                </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="medicines">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    Medicines
+                </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="temperature">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <canvas id="line" class="chart chart-line" chart-data="temperatureChart.data" style="height: 300px; width: 700px;"
+                                chart-labels="temperatureChart.labels" chart-series="temperatureChart.series" chart-options="temperatureChart.options"
+                                chart-dataset-override="temperatureChart.datasetOverride" chart-click="onClick">
+                        </canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="pressure">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    Pressure
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<br/>

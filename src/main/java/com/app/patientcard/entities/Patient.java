@@ -1,18 +1,26 @@
 package com.app.patientcard.entities;
 
+import org.hibernate.annotations.Fetch;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class Patient extends Person {
     private String description;
-    private LocalDateTime dateOfAdoption;
-    private LocalDateTime dateOfDeparture;
+    private LocalDate dateOfAdoption;
+    private LocalDate dateOfDeparture;
+    private List<Temperature> temperatures = new ArrayList<>();
+    private List<Pressure> pressures = new ArrayList<>();
+
+
+    List<Observation> observations = new ArrayList<>();
+    List<Medicine> medicines = new ArrayList<>();
 
     public String getDescription() {
         return description;
@@ -22,22 +30,19 @@ public class Patient extends Person {
         this.description = description;
     }
 
-    List<Observation> observations = new ArrayList<>();
-    List<Medicine> medicines = new ArrayList<>();
-
-    public LocalDateTime getDateOfAdoption() {
+    public LocalDate getDateOfAdoption() {
         return dateOfAdoption;
     }
 
-    public void setDateOfAdoption(LocalDateTime dateOfAdoption) {
+    public void setDateOfAdoption(LocalDate dateOfAdoption) {
         this.dateOfAdoption = dateOfAdoption;
     }
 
-    public LocalDateTime getDateOfDeparture() {
+    public LocalDate getDateOfDeparture() {
         return dateOfDeparture;
     }
 
-    public void setDateOfDeparture(LocalDateTime dateOfDeparture) {
+    public void setDateOfDeparture(LocalDate dateOfDeparture) {
         this.dateOfDeparture = dateOfDeparture;
     }
 
@@ -59,5 +64,27 @@ public class Patient extends Person {
 
     public void setMedicines(List<Medicine> medicines) {
         this.medicines = medicines;
+    }
+
+    @Fetch(org.hibernate.annotations.FetchMode.SELECT)
+    @OneToMany()
+    @JoinColumn(name = "patient_id")
+    public List<Temperature> getTemperatures() {
+        return temperatures;
+    }
+
+    public void setTemperatures(List<Temperature> temperatures) {
+        this.temperatures = temperatures;
+    }
+
+    @Fetch(org.hibernate.annotations.FetchMode.SELECT)
+    @OneToMany()
+    @JoinColumn(name = "patient_id")
+    public List<Pressure> getPressures() {
+        return pressures;
+    }
+
+    public void setPressures(List<Pressure> pressures) {
+        this.pressures = pressures;
     }
 }
