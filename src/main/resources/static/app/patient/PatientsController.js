@@ -2,7 +2,7 @@ angular.module('app').controller('PatientsController', function ($rootScope, $sc
     //$scope.dateOfBirth = $filter("date")(Date.now(), 'yyyy-MM-dd');
     $scope.dateOfBirth = new Date();
     $scope.dateOfDeparture = new Date();
-    $scope.newPatient;
+    $scope.newPatient = {};
     $scope.allPatients;
 
     $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
@@ -32,13 +32,13 @@ angular.module('app').controller('PatientsController', function ($rootScope, $sc
     }
     loadAllPatients();
     $scope.addPatient = function () {
-        var dates = {
-            "dayOfBirth":$scope.dateOfBirth,
-            "dateOfDeparture": $scope.dateOfDeparture
-        }
-        var result = Object.assign({},$scope.newPatient, dates);
+        // var dates = {
+        //     "dayOfBirth":$scope.dateOfBirth,
+        //     "dateOfDeparture": $scope.dateOfDeparture
+        // }
+        // var result = Object.assign({},$scope.newPatient, dates);
         PatientService
-            .add(result)
+            .add($scope.newPatient)
             .then(function (response) {
                 if (response.status == 200) {
                     $location.path("/patients");

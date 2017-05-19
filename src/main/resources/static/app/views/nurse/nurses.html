@@ -2,7 +2,7 @@
 <div class="col-md-10">
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h3 class="panel-title"><a href="#!/patients/add">Add patients</a> </h3>
+            <h3 class="panel-title"><a href="#!/nurses/add">Add nurse</a> </h3>
         </div>
         <div class="panel-body">
             <br/>
@@ -12,21 +12,20 @@
                         <th>Name</th>
                         <th>Surname</th>
                         <th>Email</th>
-                        <th>Description</th>
                         <th>Birth</th>
+                        <th>Salary</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="p in allPatients">
-                        <td>{{p.firstName}}</td>
-                        <td>{{p.lastName}}</td>
-                        <td>{{p.email}}</td>
-                        <td>{{p.description}}</td>
-                        <th>{{ p.dayOfBirth | date :  'dd.MM.yyyy' }}</th>
+                    <tr ng-repeat="n in allNurses">
+                        <td>{{n.firstName}}</td>
+                        <td>{{n.lastName}}</td>
+                        <td>{{n.email}}</td>
+                        <th>{{ n.dayOfBirth | date :  'dd.MM.yyyy' }}</th>
+                        <td>{{n.salary}}</td>
                         <td>
-                            <a href="#!/patients/details/{{p.id}}" role="button">Details</a>
-                            <br/><a href="#!" role="button">Delete</a>
+                            <a href="#!" role="button">Delete</a>
                         </td>
                     </tr>
                     </tbody>

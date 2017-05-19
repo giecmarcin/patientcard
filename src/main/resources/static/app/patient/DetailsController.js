@@ -21,4 +21,20 @@ angular.module('app').controller('DetailsController', function ($rootScope, $sco
             ]
         }
     };
+
+    var chartToTable = function (chart, table) {
+        table.length = 0;
+        for(var i=0; i<chart.labels.length; i++){
+            var obj = {
+                "day": chart.labels[i],
+                "temperature": chart.data[0][i]
+            }
+            table.push(obj);
+            //console.log(angular.toJson(obj));
+        }
+
+    }
+
+    $scope.temperatureTable = [];
+    chartToTable($scope.temperatureChart, $scope.temperatureTable);
 });

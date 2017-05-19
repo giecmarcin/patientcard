@@ -1,0 +1,57 @@
+<div class="col-md-3"></div>
+<div class="col-md-6">
+    <form class="form-horizontal">
+        <fieldset>
+            <legend>Add nurse</legend>
+            <div class="form-group">
+                <label for="name" class="col-lg-2 control-label">Name</label>
+                <div class="col-lg-10">
+                    <input class="form-control" id="name" placeholder="Name" type="text" ng-model="newNurse.firstName">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="surname" class="col-lg-2 control-label">Surname</label>
+                <div class="col-lg-10">
+                    <input class="form-control" id="surname" placeholder="Name" type="text" ng-model="newNurse.lastName">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Date of birth</label>
+                <div class="col-md-4">
+                    <p class="input-group" class="col-lg-10">
+                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="newNurse.dayOfBirth" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                        <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                    </p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                <div class="col-lg-10">
+                    <input class="form-control" id="inputEmail" placeholder="Email" type="text" ng-model="newNurse.email">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+                <div class="col-lg-10">
+                    <input class="form-control" id="inputPassword" placeholder="Password" type="password" ng-model="newNurse.password">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="salary" class="col-lg-2 control-label">Salary</label>
+                <div class="col-lg-10">
+                    <input class="form-control" id="salary"  type="number" step="any" ng-model="newNurse.salary">
+                    <!--<span class="help-block">A longer block of help text that breaks onto a new line and may extend beyond one line.</span>-->
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <button type="submit" class="btn btn-primary" ng-click="addNurse()">Save</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+<div class="col-md-3"></div>

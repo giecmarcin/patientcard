@@ -1,7 +1,7 @@
 angular.module('app').controller('DoctorsController', function ($rootScope, $scope, $filter, DoctorService, $location) {
     //$scope.dateOfBirth = $filter("date")(Date.now(), 'yyyy-MM-dd');
-    $scope.dateOfBirth = new Date();
-    $scope.newDoctor;
+    $scope.dateOfBirth;
+    $scope.newDoctor = {};
     $scope.allDoctors;
 
     $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
@@ -24,12 +24,12 @@ angular.module('app').controller('DoctorsController', function ($rootScope, $sco
     }
     loadAllDoctors();
     $scope.addDoctor = function () {
-        var date = {
-            "dayOfBirth":$scope.dateOfBirth
-        }
-        var result = Object.assign({},$scope.newDoctor, date);
+        // var date = {
+        //     "dayOfBirth":$scope.dateOfBirth
+        // }
+        //var result = Object.assign({},$scope.newDoctor, date);
         DoctorService
-            .add(result)
+            .add($scope.newDoctor)
             .then(function (response) {
                 if (response.status == 200) {
                     $location.path("/doctors");
