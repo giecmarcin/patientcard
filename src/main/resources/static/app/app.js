@@ -2,11 +2,16 @@ var app = angular.module('app', ['ngRoute',
     'ngResource',
     'ui.bootstrap',
     'ngStorage',
-    'chart.js']);
+    'chart.js',
+    'pascalprecht.translate',
+    'ngSanitize',
+    'dialogs.main',
+    'angular-loading-bar',
+    'cfp.loadingBar']);
 
 app.config(function($routeProvider) {
     $routeProvider
-        .when('/', {
+        .when('/login', {
             templateUrl: '/app/views/user/login.html',
             controller: 'LoginController'
         })
@@ -38,13 +43,52 @@ app.config(function($routeProvider) {
             templateUrl: '/app/views/patient/details.html',
             controller: 'DetailsController'
         })
+        .when('/welcome', {
+            templateUrl: '/app/views/welcome.html',
+            controller: 'NavBarController'
+        })
         .otherwise({
             redirectTo: '/'
         });
 });
 
-app.run(function ($localStorage) {
-    if ($localStorage.currentUser == undefined) {
-        $localStorage.currentUser=null;
-    }
+app.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+  cfpLoadingBarProvider.includeSpinner = false;
+  cfpLoadingBarProvider.includeBar = true;
+  cfpLoadingBarProvider.loadingBarTemplate = '<div id="loading-bar"><div class="bar"><div class="peg"></div></div></div>';
+}]);
+
+app.config(['$translateProvider', function($translateProvider) {
+    $translateProvider.useSanitizeValueStrategy('escape');
+    $translateProvider.translations('en', {
+        'DIALOGS_YES': 'Yes',
+        'DIALOGS_NO': 'No',
+        'DIALOGS_OK': 'Ok',
+        'DIALOGS_CLOSE': 'Close',
+    });
+
+    $translateProvider.translations('de', {
+        'DIALOGS_YES': 'Ja',
+        'DIALOGS_NO': 'Nein',
+        'DIALOGS_OK': 'Ok',
+        'DIALOGS_CLOSE': 'Schließen',
+    });
+    $translateProvider.preferredLanguage('en');
+}]);
+
+app.run(function($localStorage, $sessionStorage, $rootScope, LoginService, $location) {
+    var checkUserInLocalStorage = function() {
+        if ($sessionStorage.currentUser == undefined) {
+            $sessionStorage.currentUser = null;
+            $sessionStorage.showNavBar = false;
+            $location.path('/login');
+        } else {
+            $sessionStorage.showNavBar = true;
+        }
+    };
+    checkUserInLocalStorage();
+
+    $rootScope.$on("$locationChangeStart", function(event, next, current) {
+        checkUserInLocalStorage();
+    });
 });

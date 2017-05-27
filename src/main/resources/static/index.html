@@ -6,11 +6,13 @@
 
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/jslibraries/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/jslibraries/dialog/dialogs.min.css" />
+    <link rel="stylesheet" href="/jslibraries/progressbar/loading-bar.min.css"/>
 </head>
 <body>
 
 <header>
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default" ng-controller="NavBarController" ng-show="showNavBar" >
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -32,7 +34,7 @@
                         <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">{{email}} <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="" ng-click="removeUserFromLocalStorage()">log out</a></li>
+                            <li><a href="" ng-click="logoutUser()">log out</a></li>
                         </ul>
                     </li>
 
@@ -65,15 +67,21 @@
 <script type="text/javascript" src="/jslibraries/angular-1.6.2/angular-resource.min.js"></script>
 <script type="text/javascript" src="/jslibraries/angular-1.6.2/angular-route.min.js"></script>
 <script type="text/javascript" src="/jslibraries/angular-1.6.2/ui-bootstrap-tpls-2.5.0.min.js"></script>
+<script type="text/javascript" src="/jslibraries/angular-1.6.2/angular-sanitize.min.js"></script>
 <script type="text/javascript" src="/jslibraries/angular-1.6.2/ngStorage/ngStorage.js"></script>
+<script type="text/javascript" src="/jslibraries/angular-1.6.2/angular-translate.js"></script>
 <script type="text/javascript" src="/jslibraries/Chart.js"></script>
 <script type="text/javascript" src="/jslibraries/angular-chart.js"></script>
+<script type="text/javascript" src="/jslibraries/dialog/dialogs.min.js"></script>
+<script type="text/javascript" src="/jslibraries/dialog/dialogs-default-translations.min.js"></script>
+<script type="text/javascript" src="/jslibraries/progressbar/loading-bar.js"></script>
+
 
 
 <script type="text/javascript" src="/app/app.js" charset="utf-8"></script>
 <script type="text/javascript" src='/app/user/LoginController.js' charset="utf-8"></script>
 <script type="text/javascript" src='/app/user/LoginService.js' charset="utf-8"></script>
-<!--<script type="text/javascript" src='/app/main/NavBarController.js' charset="utf-8"></script>-->
+<script type="text/javascript" src='/app/NavBarController.js' charset="utf-8"></script>
 
 <script type="text/javascript" src='/app/doctor/DoctorsController.js' charset="utf-8"></script>
 <script type="text/javascript" src="/app/doctor/DoctorService.js" charset="utf-8"></script>
