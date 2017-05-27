@@ -1,4 +1,5 @@
-angular.module('app').controller('PatientsController', function ($rootScope, $scope, $filter, PatientService, $location) {
+angular.module('app').controller('PatientsController', function ($rootScope, $scope, $filter,
+PatientService, $location, DoctorService, dialogs) {
     //$scope.dateOfBirth = $filter("date")(Date.now(), 'yyyy-MM-dd');
     $scope.dateOfBirth = new Date();
     $scope.dateOfDeparture = new Date();
@@ -45,4 +46,19 @@ angular.module('app').controller('PatientsController', function ($rootScope, $sc
                 }
             })
     }
+    $scope.allDoctors = new Array();
+    var loadAllDoctors = function(doctors){
+        $scope.allDoctors.length = 0;
+        DoctorService
+            .findAll()
+                .then(function(response) {
+                    //doctors = response.data;
+                    $scope.allDoctors = response.data;
+                },function(response){
+                    dialogs.notify('Information', 'Problem with download data.');
+                    return null;
+                }
+            );
+    }
+    loadAllDoctors();
 });

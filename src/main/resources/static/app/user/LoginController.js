@@ -1,4 +1,4 @@
-angular.module('app').controller('LoginController', function ($rootScope, $scope, LoginService, $location, $localStorage, $window, $timeout) {
+angular.module('app').controller('LoginController', function ($rootScope, $scope, LoginService, $location, $localStorage, $window, $timeout, $sessionStorage) {
     $scope.username = '';
     $scope.password = '';
 
@@ -14,24 +14,20 @@ angular.module('app').controller('LoginController', function ($rootScope, $scope
                 if (response.status == 200) {
                     LoginService
                         .getCurrentUser().then(function (response) {
-                        $localStorage.currentUser = response.data;
-                        if (angular.equals(response.data.role, 'ADMIN')) {
-                            $timeout(reloadWithTimeout, 500);
-
-                        } else {
-                            $timeout(reloadWithTimeout, 500);
-
-                        }
-                        //$location.path('/');
-                        alert('Logged');
+                            $sessionStorage.currentUser = response.data;
+                            $sessionStorage.showNavBar = true;
+                            $rootScope.showNavBar = true;
+                            $rootScope.email = $sessionStorage.currentUser.email;
+                            $location.path('/welcome');
                     })
                 } else {
                     alert('Error');
                 }
             })
     }
-
-    function reloadWithTimeout() {
-        $window.location.reload();
+    $scope.enterLoginKey = function(keyEvent) {
+        if (keyEvent.which === 13){
+            $scope.login();
+        }
     }
 });

@@ -7,7 +7,8 @@ var app = angular.module('app', ['ngRoute',
     'ngSanitize',
     'dialogs.main',
     'angular-loading-bar',
-    'cfp.loadingBar']);
+    'cfp.loadingBar',
+    'multipleSelect']);
 
 app.config(function($routeProvider) {
     $routeProvider

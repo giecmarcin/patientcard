@@ -28,6 +28,7 @@ angular.module('app').controller('DoctorsController', function ($rootScope, $sco
         //     "dayOfBirth":$scope.dateOfBirth
         // }
         //var result = Object.assign({},$scope.newDoctor, date);
+        $scope.newDoctor.fullName = $scope.newDoctor.firstName + ' ' + $scope.newDoctor.lastName;
         DoctorService
             .add($scope.newDoctor)
             .then(function (response) {
