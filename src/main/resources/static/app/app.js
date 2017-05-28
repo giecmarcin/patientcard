@@ -9,7 +9,10 @@ var app = angular.module('app', ['ngRoute',
     'angular-loading-bar',
     'cfp.loadingBar',
     'multipleSelect',
-    'angularModalService']);
+    'angularModalService',
+    'ui.bootstrap.datetimepicker',
+    'datetimepicker'
+    ]);
 
 app.config(function($routeProvider) {
     $routeProvider

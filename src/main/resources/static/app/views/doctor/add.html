@@ -12,56 +12,61 @@
             <div class="form-group">
                 <label for="surname" class="col-lg-2 control-label">Surname</label>
                 <div class="col-lg-10">
-                    <input class="form-control" id="surname" placeholder="Name" type="text" ng-model="newDoctor.lastName">
+                    <input class="form-control" id="surname" placeholder="Name" type="text"
+                           ng-model="newDoctor.lastName">
                 </div>
             </div>
-            <!--<div class="form-group">-->
-                <!--<label for="surname" class="col-lg-2 control-label">Surname</label>-->
-                <!--<div class="col-lg-10">-->
-                    <!--<input class="form-control" id="test" placeholder="test" type="date" ng-model="newDoctor.dayOfBirth">-->
-                <!--</div>-->
-            <!--</div>-->
+
             <div class="form-group">
-                               <label class="col-lg-2 control-label">Date of birth</label>
-                <div class="col-md-4">
-                    <p class="input-group" class="col-lg-10">
-                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="newDoctor.dayOfBirth" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                <label class="col-lg-2 control-label">Date of birth</label>
+                <div class="col-lg-6">
+                    <p class="input-group">
+                        <input type="text" class="form-control"
+                               datetime-picker="dd.MM.yyyy HH:mm"
+                               ng-model="newDoctor.dayOfBirth" is-open="popup1.opened"/>
                         <span class="input-group-btn">
-                    <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
-                    </span>
+                                            <button type="button" class="btn btn-default"
+                                                    ng-click="open1()"><i
+                                                    class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
                     </p>
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputEmail" class="col-lg-2 control-label">Email</label>
                 <div class="col-lg-10">
-                    <input class="form-control" id="inputEmail" placeholder="Email" type="text" ng-model="newDoctor.email">
+                    <input class="form-control" id="inputEmail" placeholder="Email" type="text"
+                           ng-model="newDoctor.email">
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputPassword" class="col-lg-2 control-label">Password</label>
                 <div class="col-lg-10">
-                    <input class="form-control" id="inputPassword" placeholder="Password" type="password" ng-model="newDoctor.password">
+                    <input class="form-control" id="inputPassword" placeholder="Password" type="password"
+                           ng-model="newDoctor.password">
                 </div>
             </div>
             <div class="form-group">
                 <label for="speciality" class="col-lg-2 control-label">Speciality</label>
                 <div class="col-lg-10">
-                    <input class="form-control" id="speciality" placeholder="Speciality" type="text" ng-model="newDoctor.speciality">
+                    <input class="form-control" id="speciality" placeholder="Speciality" type="text"
+                           ng-model="newDoctor.speciality">
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="description" class="col-lg-2 control-label">Description</label>
                 <div class="col-lg-10">
-                    <textarea class="form-control" rows="3" id="description" ng-model="newDoctor.description"></textarea>
+                    <textarea class="form-control" rows="3" id="description"
+                              ng-model="newDoctor.description"></textarea>
                     <!--<span class="help-block">A longer block of help text that breaks onto a new line and may extend beyond one line.</span>-->
                 </div>
             </div>
             <div class="form-group">
                 <label for="salary" class="col-lg-2 control-label">Salary</label>
                 <div class="col-lg-10">
-                    <input class="form-control" id="salary" placeholder="Speciality" type="number" step="any" ng-model="newDoctor.salary">
+                    <input class="form-control" id="salary" placeholder="Speciality" type="number" step="any"
+                           ng-model="newDoctor.salary">
                     <!--<span class="help-block">A longer block of help text that breaks onto a new line and may extend beyond one line.</span>-->
                 </div>
             </div>
