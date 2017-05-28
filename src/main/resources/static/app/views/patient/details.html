@@ -86,10 +86,12 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="row">
-                        <canvas id="line" class="chart chart-line" chart-data="temperatureChart.data" style="height: 300px; width: 700px;"
-                                chart-labels="temperatureChart.labels" chart-series="temperatureChart.series" chart-options="temperatureChart.options"
-                                chart-dataset-override="temperatureChart.datasetOverride" chart-click="onClick">
+                        <div class="col-md-6">
+                        <canvas id="line" class="chart chart-line" chart-data="data" chart-labels="labels"
+                                chart-series="series" chart-options="options"
+                                chart-dataset-override="datasetOverride" chart-click="onClick">
                         </canvas>
+                        </div>
                     </div>
                     <br/>
                     <div class="row">
@@ -105,8 +107,8 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr ng-repeat="t in temperatureTable">
-                                        <td>{{t.day}}</td>
+                                    <tr ng-repeat="t in patient.temperatures | orderBy:'-zonedDateTime'">
+                                        <td>{{t.zonedDateTime | date :  'dd.MM.yyyy hh:mm'}}</td>
                                         <td>{{t.temperature}}</td>
                                     </tr>
                                     </tbody>

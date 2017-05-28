@@ -1,12 +1,12 @@
 angular.module('app').controller('DetailsController', function($rootScope, $scope, $filter, PatientService,
-$location, $routeParams, ModalService, dialogs, PatientService) {
-
-    //$scope.patient={};
+$location, $routeParams, ModalService, dialogs, PatientService, $filter) {
     var  loadPatientData = function(id){
             PatientService
                 .findOne(id)
                 .then(function (response) {
                   $scope.patient = response.data;
+                  var temperaturesData = prepareTemperatures($scope.patient);
+                  $scope.makeTemperatureChart(temperaturesData.labels, temperaturesData.dataY);
                 }, function(response){
                   //error callback
                   dialogs.error('Error', 'Problem with download data.');
@@ -14,29 +14,6 @@ $location, $routeParams, ModalService, dialogs, PatientService) {
     }
     loadPatientData($routeParams.id);
 
-    $scope.temperatureChart = {}
-    $scope.temperatureChart.labels = ["2017-05-01", "2017-05-02", "2017-05-03", "2017-05-04", "2017-05-04", "2017-05-05", "2017-05-06"];
-    $scope.temperatureChart.series = ['Series A'];
-    $scope.temperatureChart.data = [
-        [35, 36, 37, 38, 38, 36.6, 36.6]
-    ];
-    $scope.temperatureChart.datasetOverride = [{
-        fill: false
-    }, {
-        fill: false
-    }];
-    $scope.temperatureChart.options = {
-        responsive: false,
-        maintainAspectRatio: false,
-        scales: {
-            yAxes: [{
-                id: 'y-axis-1',
-                type: 'linear',
-                display: true,
-                position: 'left'
-            }]
-        }
-    };
 
     var chartToTable = function(chart, table) {
         table.length = 0;
@@ -52,7 +29,7 @@ $location, $routeParams, ModalService, dialogs, PatientService) {
     }
 
     $scope.temperatureTable = [];
-    chartToTable($scope.temperatureChart, $scope.temperatureTable);
+    //chartToTable($scope.temperatureChart, $scope.temperatureTable);
 
     $scope.showDialogTemperature = function() {
         ModalService.showModal({
@@ -80,10 +57,55 @@ $location, $routeParams, ModalService, dialogs, PatientService) {
                 .add(patient)
                 .then(function (response) {
                     if(response.status==200){
+                        loadPatientData($routeParams.id);
                         dialogs.notify('Information', 'Data has been saved.');
                     }else{
                         dialogs.error('Problem', 'Problem with saving data');
                     }
                 })
+    }
+
+    function prepareTemperatures(patient){
+        var sortedTemperatures = $filter('orderBy')(patient.temperatures, 'zonedDateTime');
+        var onlyTemperatures = new Array();
+        var labels = new Array();
+
+        for(var i=0; i<sortedTemperatures.length; i++){
+            onlyTemperatures.push(sortedTemperatures[i].temperature);
+            var time = $filter('date')(sortedTemperatures[i].zonedDateTime, "dd.MM.yyyy hh:mm");
+            labels.push(time);
+        }
+        var obj = {
+            "labels": labels,
+            "dataY" : onlyTemperatures
+        }
+        return obj;
+    }
+
+       $scope.makeTemperatureChart = function (dataX, dataY) { //metoda rysująca wykres
+            $scope.labels = dataX;
+            $scope.series = ['Temperature'];
+
+            $scope.data = [
+                dataY
+            ];
+            $scope.datasetOverride = [{fill: false}];
+            $scope.options = {
+                scales: {
+                    yAxes: [
+                        {
+                            id: 'y-axis-1',
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                        }
+                    ]
+                },
+                elements: {
+                    point: {
+                        radius: 3
+                    }
+                }
+            };
     }
 });
