@@ -14,7 +14,7 @@ angular.module('app').service('PatientService', function($http) {
     }
 
     this.findAll = function () {
-        var url = 'api/patients/all';
+        var url = '/api/patients/all';
         return $http({
             method: "GET",
             url: url
@@ -22,6 +22,18 @@ angular.module('app').service('PatientService', function($http) {
             return response;
         }, function errorCallback(response) {
             return response;
+        });
+    }
+
+    this.findOne = function (id) {
+        var url = '/api/patients/id/' + id;
+        return $http({
+            method: "GET",
+            url: url
+        }).then(function successCallback(response) {
+            return response;
+        }, function errorCallback(response) {
+           return response;
         });
     }
 });

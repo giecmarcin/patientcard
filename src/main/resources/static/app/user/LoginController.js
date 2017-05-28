@@ -26,8 +26,10 @@ angular.module('app').controller('LoginController', function ($rootScope, $scope
             })
     }
     $scope.enterLoginKey = function(keyEvent) {
-        if (keyEvent.which === 13){
-            $scope.login();
+        if(keyEvent!=undefined){
+                if (keyEvent.which === 13){
+                    $scope.login();
+                }
         }
     }
 });

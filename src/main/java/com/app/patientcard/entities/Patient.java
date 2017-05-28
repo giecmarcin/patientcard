@@ -1,11 +1,10 @@
 package com.app.patientcard.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.annotations.Fetch;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +16,7 @@ public class Patient extends Person {
     private LocalDate dateOfDeparture;
     private List<Temperature> temperatures = new ArrayList<>();
     private List<Pressure> pressures = new ArrayList<>();
+    private List<Doctor> doctors = new ArrayList<>();
 
 
     List<Observation> observations = new ArrayList<>();
@@ -86,5 +86,15 @@ public class Patient extends Person {
 
     public void setPressures(List<Pressure> pressures) {
         this.pressures = pressures;
+    }
+
+    @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+    @ManyToMany(mappedBy = "patients")
+    public List<Doctor> getDoctors() {
+        return doctors;
+    }
+
+    public void setDoctors(List<Doctor> doctors) {
+        this.doctors = doctors;
     }
 }

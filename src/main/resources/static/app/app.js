@@ -8,7 +8,8 @@ var app = angular.module('app', ['ngRoute',
     'dialogs.main',
     'angular-loading-bar',
     'cfp.loadingBar',
-    'multipleSelect']);
+    'multipleSelect',
+    'angularModalService']);
 
 app.config(function($routeProvider) {
     $routeProvider

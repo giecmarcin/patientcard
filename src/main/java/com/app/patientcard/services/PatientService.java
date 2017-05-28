@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by Marcin on 17.05.2017.
@@ -22,10 +23,29 @@ public class PatientService {
     @Autowired
     private PatientRepository patientRepository;
 
+    @Autowired
+    private DoctorRepository doctorRepository;
+
     public void save(Patient patient){
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         patient.setPassword(encoder.encode(patient.getPassword()));
         patient.setRole(Role.PATIENT);
+        for(Doctor doctor : patient.getDoctors()){
+            if(!doctor.getPatients().contains(patient)){
+                Doctor d = doctorRepository.findOne(doctor.getId());
+                d.getPatients().add(patient);
+            }
+        }
+//        Region region = regionRepository.findOne(regionIUprawy.getId());
+//        if(region!=null){
+//            for(Long idUprawy : regionIUprawy.getIds()){
+//                Uprawa uprawa = uprawaRepository.findOne(idUprawy);
+//                if(!region.getUprawy().contains(uprawa)){
+//                    region.getUprawy().add(uprawa);
+//                }
+//            }
+//            zmodyfikowano = true;
+//        }
         patientRepository.save(patient);
     }
 
@@ -34,5 +54,9 @@ public class PatientService {
         List<Patient> patients = new ArrayList<>();
         source.forEach(patients::add);
         return patients;
+    }
+
+    public Optional<Patient> findOne(long id){
+        return Optional.ofNullable(patientRepository.findOne(id));
     }
 }

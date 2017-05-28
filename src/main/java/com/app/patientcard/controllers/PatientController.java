@@ -29,6 +29,16 @@ public class PatientController {
         }
     }
 
+    @GetMapping("/id/{id}")
+    public ResponseEntity<?> findOne(@PathVariable Long id){
+        Optional<Patient> patientOpt = patientService.findOne(id);
+        if(patientOpt.isPresent()){
+            return ResponseEntity.ok(patientOpt.get());
+        }else {
+            return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
+        }
+    }
+
     @GetMapping("/all")
     public ResponseEntity<?> findAll(){
         List<Patient> allPatients = patientService.findAll();

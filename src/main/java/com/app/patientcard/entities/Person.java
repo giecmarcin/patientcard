@@ -12,6 +12,7 @@ public abstract class Person {
     private String password;
     private LocalDate dayOfBirth;
     private Role role;
+    private String fullName;
 
     public Person() {
     }
@@ -73,5 +74,13 @@ public abstract class Person {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 }
