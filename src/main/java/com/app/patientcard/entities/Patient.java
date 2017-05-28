@@ -67,7 +67,7 @@ public class Patient extends Person {
     }
 
     @Fetch(org.hibernate.annotations.FetchMode.SELECT)
-    @OneToMany()
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "patient_id")
     public List<Temperature> getTemperatures() {
         return temperatures;
@@ -90,7 +90,7 @@ public class Patient extends Person {
 
     //@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
     @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class,property="@id", scope = Patient.class)
-    @ManyToMany(mappedBy = "patients")
+    @ManyToMany(/*mappedBy = "patients"*/)
     public List<Doctor> getDoctors() {
         return doctors;
     }
@@ -98,4 +98,6 @@ public class Patient extends Person {
     public void setDoctors(List<Doctor> doctors) {
         this.doctors = doctors;
     }
+
+
 }

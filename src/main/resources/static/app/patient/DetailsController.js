@@ -3,7 +3,6 @@ $location, $routeParams, ModalService, dialogs, PatientService) {
 
     //$scope.patient={};
     var  loadPatientData = function(id){
-            var me = $scope;
             PatientService
                 .findOne(id)
                 .then(function (response) {
@@ -63,11 +62,28 @@ $location, $routeParams, ModalService, dialogs, PatientService) {
             modal.element.modal();
             modal.closed.then(function(temperature) {
                 if (temperature) {
-                    console.log(temperature + 'test');
+                    var temperatureObj = {
+                        "temperature": temperature.temp,
+                        "zonedDateTime": temperature.time
+                    }
+                    $scope.patient.temperatures.push(temperatureObj);
+                    save($scope.patient);
                 } else {
                     dialogs.error('Error', 'Problem with temperature.');
                 }
             });
         });
     };
+
+    var save = function(patient){
+            PatientService
+                .add(patient)
+                .then(function (response) {
+                    if(response.status==200){
+                        dialogs.notify('Information', 'Data has been saved.');
+                    }else{
+                        dialogs.error('Problem', 'Problem with saving data');
+                    }
+                })
+    }
 });

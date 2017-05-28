@@ -38,7 +38,7 @@ public class Doctor extends Person {
         this.description = description;
     }
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "doctors")
     public List<Patient> getPatients() {
         return patients;
     }

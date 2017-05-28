@@ -6,13 +6,30 @@
                 <h4 class="modal-title">Temperature</h4>
             </div>
             <div class="modal-body">
+                <fieldset>
                 <div class="form-group ">
                     <label>Temperature</label>
                     <!--<input class="form-control" type="text" ng-model="notes"/>-->
-                    <input type="number" step="any" class="form-control" rows="4" cols="50" ng-model="temperature">
+                    <input type="number" step="any" class="form-control" rows="4" cols="50" ng-model="temperature.temp">
 
                     </input>
-                </div>                            
+                </div>
+                <div class="form-group">
+                    <label>Date and time</label>
+                    <!--<div class="col-lg-6">-->
+                        <p class="input-group">
+                            <input type="text" class="form-control"
+                                   datetime-picker="dd.MM.yyyy HH:mm"
+                                   ng-model="temperature.time" is-open="popup1.opened"/>
+                            <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default"
+                                                    ng-click="open1()"><i
+                                                    class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+                        </p>
+                    <!--</div>-->
+                </div>
+                </fieldset>
             </div>
             <div class="modal-footer">
                                 <button type="button" ng-click="ok()" class="btn btn-primary" >Ok</button>

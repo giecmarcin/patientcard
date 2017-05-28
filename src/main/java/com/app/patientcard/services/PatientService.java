@@ -30,22 +30,6 @@ public class PatientService {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         patient.setPassword(encoder.encode(patient.getPassword()));
         patient.setRole(Role.PATIENT);
-        for(Doctor doctor : patient.getDoctors()){
-            if(!doctor.getPatients().contains(patient)){
-                Doctor d = doctorRepository.findOne(doctor.getId());
-                d.getPatients().add(patient);
-            }
-        }
-//        Region region = regionRepository.findOne(regionIUprawy.getId());
-//        if(region!=null){
-//            for(Long idUprawy : regionIUprawy.getIds()){
-//                Uprawa uprawa = uprawaRepository.findOne(idUprawy);
-//                if(!region.getUprawy().contains(uprawa)){
-//                    region.getUprawy().add(uprawa);
-//                }
-//            }
-//            zmodyfikowano = true;
-//        }
         patientRepository.save(patient);
     }
 
