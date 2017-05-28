@@ -1,10 +1,8 @@
 package com.app.patientcard.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.ZonedDateTime;
 
 /**
  * Created by Marcin on 17.05.2017.
@@ -13,7 +11,7 @@ import java.time.LocalDate;
 public class Temperature {
     private Long id;
     private double temperature;
-    private LocalDate date;
+    private ZonedDateTime zonedDateTime;
 
     public Temperature() {
     }
@@ -36,11 +34,12 @@ public class Temperature {
         this.temperature = temperature;
     }
 
-    public LocalDate getDate() {
-        return date;
+    @Column(columnDefinition = "timestamp with time zone")
+    public ZonedDateTime getZonedDateTime() {
+        return zonedDateTime;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setZonedDateTime(ZonedDateTime zonedDateTime) {
+        this.zonedDateTime = zonedDateTime;
     }
 }

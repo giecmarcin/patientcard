@@ -2,6 +2,7 @@ package com.app.patientcard.entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.ZonedDateTime;
 
 @Entity
 public abstract class Person {
@@ -10,7 +11,7 @@ public abstract class Person {
     private String lastName;
     private String email;
     private String password;
-    private LocalDate dayOfBirth;
+    private ZonedDateTime dayOfBirth;
     private Role role;
     private String fullName;
 
@@ -59,11 +60,12 @@ public abstract class Person {
         this.password = password;
     }
 
-    public LocalDate getDayOfBirth() {
+    @Column(columnDefinition = "timestamp with time zone")
+    public ZonedDateTime getDayOfBirth() {
         return dayOfBirth;
     }
 
-    public void setDayOfBirth(LocalDate dayOfBirth) {
+    public void setDayOfBirth(ZonedDateTime dayOfBirth) {
         this.dayOfBirth = dayOfBirth;
     }
 

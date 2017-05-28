@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDate;
+import java.time.ZonedDateTime;
 
 /**
  * Created by Marcin on 17.05.2017.
@@ -13,7 +14,7 @@ import java.time.LocalDate;
 public class Pressure {
     private Long id;
     private double pressure;
-    private LocalDate date;
+    private ZonedDateTime zonedDateTime;
 
     public Pressure() {
     }
@@ -36,11 +37,11 @@ public class Pressure {
         this.pressure = pressure;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public ZonedDateTime getZonedDateTime() {
+        return zonedDateTime;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setZonedDateTime(ZonedDateTime zonedDateTime) {
+        this.zonedDateTime = zonedDateTime;
     }
 }

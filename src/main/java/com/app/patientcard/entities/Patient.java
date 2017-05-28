@@ -88,7 +88,8 @@ public class Patient extends Person {
         this.pressures = pressures;
     }
 
-    @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+    //@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+    @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class,property="@id", scope = Patient.class)
     @ManyToMany(mappedBy = "patients")
     public List<Doctor> getDoctors() {
         return doctors;

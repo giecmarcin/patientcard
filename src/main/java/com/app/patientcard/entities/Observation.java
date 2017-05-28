@@ -1,14 +1,13 @@
 package com.app.patientcard.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.time.ZonedDateTime;
 
 @Entity
 public class Observation {
     private Long id;
     private String description;
+    private ZonedDateTime zonedDateTime;
 
     public Observation() {
     }
@@ -29,5 +28,14 @@ public class Observation {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Column(columnDefinition = "timestamp with time zone")
+    public ZonedDateTime getZonedDateTime() {
+        return zonedDateTime;
+    }
+
+    public void setZonedDateTime(ZonedDateTime zonedDateTime) {
+        this.zonedDateTime = zonedDateTime;
     }
 }

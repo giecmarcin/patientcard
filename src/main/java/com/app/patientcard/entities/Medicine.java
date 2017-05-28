@@ -1,17 +1,15 @@
 package com.app.patientcard.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 @Entity
 public class Medicine {
     private Long id;
     private String name;
     private double quantity;
-    private LocalDateTime time;
+    private ZonedDateTime zonedDateTime;
 
     public Medicine() {
     }
@@ -42,11 +40,12 @@ public class Medicine {
         this.quantity = quantity;
     }
 
-    public LocalDateTime getTime() {
-        return time;
+    @Column(columnDefinition = "timestamp with time zone")
+    public ZonedDateTime getZonedDateTime() {
+        return zonedDateTime;
     }
 
-    public void setTime(LocalDateTime time) {
-        this.time = time;
+    public void setZonedDateTime(ZonedDateTime zonedDateTime) {
+        this.zonedDateTime = zonedDateTime;
     }
 }

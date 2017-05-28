@@ -7,6 +7,9 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Optional;
 
 @Component
@@ -20,7 +23,8 @@ public class Init {
         Optional<Admin> adminByEmail = personService.findAdminByEmail("giecmarcin@gmail.com");
         if(!adminByEmail.isPresent()){
             Admin admin = new Admin();
-            admin.setDayOfBirth(LocalDate.of(1992,3,8));
+            //admin.setDayOfBirth(LocalDate.of(1992,3,8));
+            admin.setDayOfBirth(ZonedDateTime.now());
             admin.setFirstName("Marcin");
             admin.setLastName("Giec");
             admin.setRole(Role.ADMIN);
