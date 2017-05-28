@@ -29,7 +29,6 @@ $location, $routeParams, ModalService, dialogs, PatientService, $filter) {
     }
 
     $scope.temperatureTable = [];
-    //chartToTable($scope.temperatureChart, $scope.temperatureTable);
 
     $scope.showDialogTemperature = function() {
         ModalService.showModal({
@@ -107,5 +106,26 @@ $location, $routeParams, ModalService, dialogs, PatientService, $filter) {
                     }
                 }
             };
+    }
+
+    $scope.addObservation = function(){
+            ModalService.showModal({
+                templateUrl: '/app/views/modal/ObservationModal.html',
+                controller: "ObservationModalController"
+            }).then(function(modal) {
+                modal.element.modal();
+                modal.closed.then(function(obj) {
+                    if (obj) {
+                        var observationObj = {
+                            "description": obj.description,
+                            "zonedDateTime": obj.time
+                        }
+                        $scope.patient.observations.push(observationObj);
+                        save($scope.patient);
+                    } else {
+                        dialogs.error('Error', 'Problem with observation.');
+                    }
+                });
+            });
     }
 });

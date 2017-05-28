@@ -46,7 +46,7 @@ public class Patient extends Person {
         this.dateOfDeparture = dateOfDeparture;
     }
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "patient_id")
     public List<Observation> getObservations() {
         return observations;
