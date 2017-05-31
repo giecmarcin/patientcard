@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +22,7 @@ public class PatientController {
     private PatientService patientService;
     @PostMapping("/add")
     public ResponseEntity<?> addNurse(@RequestBody Patient patient){
+        patient.setDateOfAdoption(ZonedDateTime.now());
         patientService.save(patient);
         if(Optional.ofNullable(patient.getId()).isPresent()){
             return ResponseEntity.ok(patient);
@@ -47,5 +49,11 @@ public class PatientController {
         }else {
             return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
         }
+    }
+
+    @GetMapping("/new")
+    public ResponseEntity<?> newPatient(){
+        Patient patient = new Patient();
+        return ResponseEntity.ok(patient);
     }
 }

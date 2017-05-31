@@ -1,4 +1,4 @@
-angular.module('app').controller('LoginController', function ($rootScope, $scope, LoginService, $location, $localStorage, $window, $timeout, $sessionStorage) {
+angular.module('app').controller('LoginController', function ($rootScope, $scope, LoginService, $location, $localStorage, $window, $timeout, $sessionStorage, dialogs) {
     $scope.username = '';
     $scope.password = '';
 
@@ -21,7 +21,7 @@ angular.module('app').controller('LoginController', function ($rootScope, $scope
                             $location.path('/welcome');
                     })
                 } else {
-                    alert('Error');
+                    dialogs.notify("Information", "Wrong password.");
                 }
             })
     }

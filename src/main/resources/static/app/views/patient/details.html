@@ -18,7 +18,110 @@
         <div role="tabpanel" class="tab-pane active" id="home">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    Details {{patient.firstName}}
+                    <div class="row">
+                        <form class="form-horizontal">
+                            <div class="col-md-6">
+                                <fieldset>
+                                    <!--<legend>Add patient</legend>-->
+                                    <div class="form-group">
+                                        <label for="name" class="col-lg-2 control-label">Name</label>
+                                        <div class="col-lg-10">
+                                            <input class="form-control" id="name" placeholder="Name" type="text"
+                                                   ng-model="patient.firstName">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="surname" class="col-lg-2 control-label">Surname</label>
+                                        <div class="col-lg-10">
+                                            <input class="form-control" id="surname" placeholder="Name" type="text"
+                                                   ng-model="patient.lastName">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label">Date of birth</label>
+                                        <div class="col-lg-6">
+                                            <p class="input-group">
+                                                <input type="text" class="form-control"
+                                                       datetime-picker="dd.MM.yyyy HH:mm"
+                                                       ng-model="patient.dayOfBirth" is-open="popup1DetailPatient.opened"/>
+                                                <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default"
+                                                    ng-click="open1DetailPatient()"><i
+                                                    class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+                                            </p>
+                                            <!--<pre><p>{{patient.dayOfBirth | date :  'dd.MM.yyyy hh:mm'}}</p></pre>-->
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                                        <div class="col-lg-10">
+                                            <input class="form-control" id="inputEmail" placeholder="Email" type="text"
+                                                   ng-model="patient.email">
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="col-md-6">
+                                <fieldset>
+                                    <legend><br/></legend>
+                                    <div class="form-group">
+                                        <label for="description" class="col-lg-2 control-label">Description</label>
+                                        <div class="col-lg-10">
+                        <textarea class="form-control" rows="3" id="description"
+                                  ng-model="patient.description"></textarea>
+                                            <!--<span class="help-block">A longer block of help text that breaks onto a new line and may extend beyond one line.</span>-->
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name" class="col-lg-2 control-label">Date of adoption</label>
+                                        <div class="col-lg-10">
+                                            <pre>{{patient.dateOfAdoption | date :  'dd.MM.yyyy'}}</pre>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label">Date of departure</label>
+                                        <div class="col-md-4">
+                                            <p class="input-group">
+                                                <input type="text" class="form-control"
+                                                       datetime-picker="dd.MM.yyyy HH:mm"
+                                                       ng-model="patient.dayOfDeparture" is-open="popup2DetailPatient.opened"/>
+                                                <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default"
+                                                    ng-click="open2DetailPatient()"><i
+                                                    class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </form>
+
+                    </div>
+                    <div class="row">
+                        <form class="form-horizontal">
+                            <div class="col-md-6">
+                                <fieldset>
+                                    <div class="form-group">
+                                        <label for="name" class="col-lg-2 control-label">Choose doctors</label>
+                                        <div class="col-lg-10">
+                                            <multiple-autocomplete
+                                                    ng-model="patient.doctors"
+                                                    object-property="lastName"
+                                                    suggestions-arr="allDoctors">
+                                            </multiple-autocomplete>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-10 col-lg-offset-2">
+                                            <button type="submit" class="btn btn-primary" ng-click="updatePatient(patient)">Update</button>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

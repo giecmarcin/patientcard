@@ -1,6 +1,7 @@
 angular.module('app').controller('PatientsController', function ($rootScope, $scope, $filter,
 PatientService, $location, DoctorService, dialogs) {
     //$scope.dateOfBirth = $filter("date")(Date.now(), 'yyyy-MM-dd');
+
     $scope.dateOfBirth = new Date();
     $scope.dateOfDeparture = new Date();
     $scope.newPatient = {};
@@ -33,11 +34,6 @@ PatientService, $location, DoctorService, dialogs) {
     }
     loadAllPatients();
     $scope.addPatient = function () {
-        // var dates = {
-        //     "dayOfBirth":$scope.dateOfBirth,
-        //     "dateOfDeparture": $scope.dateOfDeparture
-        // }
-        // var result = Object.assign({},$scope.newPatient, dates);
         PatientService
             .add($scope.newPatient)
             .then(function (response) {

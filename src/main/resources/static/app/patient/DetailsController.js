@@ -1,10 +1,30 @@
 angular.module('app').controller('DetailsController', function($rootScope, $scope, $filter, PatientService,
-$location, $routeParams, ModalService, dialogs, PatientService, $filter) {
+$location, $routeParams, ModalService, dialogs, PatientService, $filter, DoctorService) {
+    $scope.open1DetailPatient = function() {
+        $scope.popup1DetailPatient.opened = true;
+    };
+    $scope.popup1DetailPatient = {
+        opened: false
+    };
+
+    $scope.open2DetailPatient = function() {
+        $scope.popup2DetailPatient.opened = true;
+    };
+    $scope.popup2DetailPatient = {
+        opened: false
+    };
+
+    $scope.ok = function() {
+        $element.modal('hide');
+        close($scope.temperature, 500);
+    };
     var  loadPatientData = function(id){
             PatientService
                 .findOne(id)
                 .then(function (response) {
                   $scope.patient = response.data;
+                  $scope.patient.dayOfBirth = new Date($scope.patient.dayOfBirth);
+                  $scope.patient.dateOfDeparture = new Date($scope.patient.dateOfDeparture);
                   var temperaturesData = prepareTemperatures($scope.patient);
                   $scope.makeTemperatureChart(temperaturesData.labels, temperaturesData.dataY);
                 }, function(response){
@@ -127,5 +147,33 @@ $location, $routeParams, ModalService, dialogs, PatientService, $filter) {
                     }
                 });
             });
+    }
+
+    $scope.updatePatient = function(patient){
+        //prepareFullNamesForDoctors(patient);
+        save(patient);
+    }
+    $scope.allDoctors = new Array();
+    var loadAllDoctors = function(doctors){
+        $scope.allDoctors.length = 0;
+        DoctorService
+            .findAll()
+                .then(function(response) {
+                    //doctors = response.data;
+                    $scope.allDoctors = response.data;
+                },function(response){
+                    dialogs.notify('Information', 'Problem with download data.');
+                    return null;
+                }
+            );
+    }
+    loadAllDoctors();
+
+    function prepareFullNamesForDoctors(patient){
+        if(patient.doctors!=undefined){
+            for(var i=0; i<patient.doctors.length;i++){
+                patient.doctors[i].fullName = patient.doctors[i].firstName + ' ' + patient.doctors[i].lastName;
+            }
+        }
     }
 });

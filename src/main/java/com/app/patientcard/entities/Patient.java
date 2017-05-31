@@ -6,14 +6,15 @@ import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class Patient extends Person {
     private String description;
-    private LocalDate dateOfAdoption;
-    private LocalDate dateOfDeparture;
+    private ZonedDateTime dateOfAdoption;
+    private ZonedDateTime dateOfDeparture;
     private List<Temperature> temperatures = new ArrayList<>();
     private List<Pressure> pressures = new ArrayList<>();
     private List<Doctor> doctors = new ArrayList<>();
@@ -30,19 +31,21 @@ public class Patient extends Person {
         this.description = description;
     }
 
-    public LocalDate getDateOfAdoption() {
+    @Column(columnDefinition = "timestamp with time zone")
+    public ZonedDateTime getDateOfAdoption() {
         return dateOfAdoption;
     }
 
-    public void setDateOfAdoption(LocalDate dateOfAdoption) {
+    public void setDateOfAdoption(ZonedDateTime dateOfAdoption) {
         this.dateOfAdoption = dateOfAdoption;
     }
 
-    public LocalDate getDateOfDeparture() {
+    @Column(columnDefinition = "timestamp with time zone")
+    public ZonedDateTime getDateOfDeparture() {
         return dateOfDeparture;
     }
 
-    public void setDateOfDeparture(LocalDate dateOfDeparture) {
+    public void setDateOfDeparture(ZonedDateTime dateOfDeparture) {
         this.dateOfDeparture = dateOfDeparture;
     }
 
@@ -90,7 +93,7 @@ public class Patient extends Person {
 
     //@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
     @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class,property="@id", scope = Patient.class)
-    @ManyToMany(/*mappedBy = "patients"*/)
+    @ManyToMany(/*value = mappedBy = "patients", */cascade = {CascadeType.MERGE})
     public List<Doctor> getDoctors() {
         return doctors;
     }
