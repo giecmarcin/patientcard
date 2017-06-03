@@ -149,6 +149,28 @@ $location, $routeParams, ModalService, dialogs, PatientService, $filter, DoctorS
             });
     }
 
+    $scope.addMedicine = function(){
+            ModalService.showModal({
+                templateUrl: '/app/views/modal/MedicineModal.html',
+                controller: "MedicineModalController"
+            }).then(function(modal) {
+                modal.element.modal();
+                modal.closed.then(function(obj) {
+                    if (obj) {
+                        var medicineObj = {
+                            "name": obj.name,
+                            "quantity": obj.quantity,
+                            "zonedDateTime": obj.time
+                        }
+                        $scope.patient.medicines.push(medicineObj);
+                        save($scope.patient);
+                    } else {
+                        dialogs.error('Error', 'Problem with adding medicine.');
+                    }
+                });
+            });
+    }
+
     $scope.updatePatient = function(patient){
         //prepareFullNamesForDoctors(patient);
         save(patient);

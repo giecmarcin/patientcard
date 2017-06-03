@@ -59,7 +59,7 @@ public class Patient extends Person {
         this.observations = observations;
     }
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     @JoinColumn(name = "patient_id")
     public List<Medicine> getMedicines() {
         return medicines;

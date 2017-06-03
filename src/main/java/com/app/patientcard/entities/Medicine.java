@@ -8,7 +8,7 @@ import java.time.ZonedDateTime;
 public class Medicine {
     private Long id;
     private String name;
-    private double quantity;
+    private String quantity;
     private ZonedDateTime zonedDateTime;
 
     public Medicine() {
@@ -32,11 +32,11 @@ public class Medicine {
         this.name = name;
     }
 
-    public double getQuantity() {
+    public String getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(double quantity) {
+    public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
 
