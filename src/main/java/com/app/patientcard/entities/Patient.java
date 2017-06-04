@@ -2,18 +2,22 @@ package com.app.patientcard.entities;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class Patient extends Person {
+    @NotEmpty
     private String description;
     private ZonedDateTime dateOfAdoption;
+    @NotNull
     private ZonedDateTime dateOfDeparture;
     private List<Temperature> temperatures = new ArrayList<>();
     private List<Pressure> pressures = new ArrayList<>();
@@ -49,6 +53,7 @@ public class Patient extends Person {
         this.dateOfDeparture = dateOfDeparture;
     }
 
+    @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "patient_id")
     public List<Observation> getObservations() {
@@ -59,7 +64,8 @@ public class Patient extends Person {
         this.observations = observations;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "patient_id")
     public List<Medicine> getMedicines() {
         return medicines;
@@ -69,7 +75,8 @@ public class Patient extends Person {
         this.medicines = medicines;
     }
 
-    @Fetch(org.hibernate.annotations.FetchMode.SELECT)
+    //@Fetch(org.hibernate.annotations.FetchMode.SELECT)
+    @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "patient_id")
     public List<Temperature> getTemperatures() {
@@ -80,7 +87,8 @@ public class Patient extends Person {
         this.temperatures = temperatures;
     }
 
-    @Fetch(org.hibernate.annotations.FetchMode.SELECT)
+    //@Fetch(org.hibernate.annotations.FetchMode.SELECT)
+    @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany()
     @JoinColumn(name = "patient_id")
     public List<Pressure> getPressures() {
@@ -92,6 +100,7 @@ public class Patient extends Person {
     }
 
     //@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+    @LazyCollection(LazyCollectionOption.FALSE)
     @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class,property="@id", scope = Patient.class)
     @ManyToMany(/*value = mappedBy = "patients", */cascade = {CascadeType.MERGE})
     public List<Doctor> getDoctors() {

@@ -1,4 +1,5 @@
-angular.module('app').controller('DoctorsController', function ($rootScope, $scope, $filter, DoctorService, $location) {
+angular.module('app').controller('DoctorsController', function ($rootScope, $scope, $filter, DoctorService, $location,
+dialogs) {
     //$scope.dateOfBirth = $filter("date")(Date.now(), 'yyyy-MM-dd');
     $scope.dateOfBirth;
     $scope.newDoctor = {};
@@ -33,8 +34,27 @@ angular.module('app').controller('DoctorsController', function ($rootScope, $sco
             .add($scope.newDoctor)
             .then(function (response) {
                 if (response.status == 200) {
-                    $location.path("/doctors");
+                    //$location.path("/doctors");
+                    clearDoctorFields();
+                    dialogs.notify("Information", "Doctor has been added");
+                }else{
+                    var errorMsg = '';
+                    var errorMessage = '';
+                    if(response.data.errors!=undefined){
+                        errorMsg = response.data.errors.toString();
+                    }
+                    if(response.data.errorMessage!=undefined){
+                        errorMessage = response.data.errorMessage;
+                    }
+                    dialogs.error("Error", "Problem with adding doctor. "
+                    + "\Problems "+ errorMessage
+                    + ":\n " + errorMsg
+                    + " status: " + response.status);
                 }
             })
+    }
+
+    function clearDoctorFields(){
+        $scope.newDoctor = {};
     }
 });

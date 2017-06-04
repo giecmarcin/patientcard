@@ -27,8 +27,10 @@ public class PatientService {
     private DoctorRepository doctorRepository;
 
     public void save(Patient patient){
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        patient.setPassword(encoder.encode(patient.getPassword()));
+        if(patient.getId()==null){
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            patient.setPassword(encoder.encode(patient.getPassword()));
+        }
         patient.setRole(Role.PATIENT);
         patientRepository.save(patient);
     }

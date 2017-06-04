@@ -37,8 +37,25 @@ PatientService, $location, DoctorService, dialogs) {
         PatientService
             .add($scope.newPatient)
             .then(function (response) {
+                //console.log(response);
                 if (response.status == 200) {
-                    $location.path("/patients");
+                    //$location.path("/patients");
+                    loadAllPatients();
+                    clearPatientFields();
+                    dialogs.notify("Information", "Patient has been added");
+                }else{
+                    var errorMsg = '';
+                    var errorMessage = '';
+                    if(response.data.errors!=undefined){
+                        errorMsg = response.data.errors.toString();
+                    }
+                    if(response.data.errorMessage!=undefined){
+                        errorMessage = response.data.errorMessage;
+                    }
+                    dialogs.error("Error", "Problem with adding patient. "
+                    + "\Problems "+ errorMessage
+                    + ":\n " + errorMsg
+                    + " status: " + response.status);
                 }
             })
     }
@@ -57,4 +74,8 @@ PatientService, $location, DoctorService, dialogs) {
             );
     }
     loadAllDoctors();
+
+    function clearPatientFields(){
+        $scope.newPatient = {};
+    }
 });

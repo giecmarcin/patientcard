@@ -23,8 +23,10 @@ public class NurseService {
     private NurseRepository nurseRepository;
 
     public void save(Nurse nurse){
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        nurse.setPassword(encoder.encode(nurse.getPassword()));
+        if(nurse.getId()==null){
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            nurse.setPassword(encoder.encode(nurse.getPassword()));
+        }
         nurse.setRole(Role.NURSE);
         nurseRepository.save(nurse);
     }

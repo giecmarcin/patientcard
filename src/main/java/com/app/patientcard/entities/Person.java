@@ -1,16 +1,29 @@
 package com.app.patientcard.entities;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 
 @Entity
 public abstract class Person {
     private Long id;
+    @NotEmpty
+    @Size(min=3, max = 30)
     private String firstName;
+    @NotEmpty
+    @Size(min=3, max = 30)
     private String lastName;
+    @Email
+    @Column(unique = true)
     private String email;
+    @NotEmpty
     private String password;
+    @NotNull
     private ZonedDateTime dayOfBirth;
     private Role role;
     private String fullName;

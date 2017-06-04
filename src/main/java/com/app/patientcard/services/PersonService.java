@@ -3,6 +3,7 @@ package com.app.patientcard.services;
 
 import com.app.patientcard.entities.Admin;
 import com.app.patientcard.entities.Doctor;
+import com.app.patientcard.entities.Person;
 import com.app.patientcard.entities.Role;
 import com.app.patientcard.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +19,18 @@ public class PersonService {
     private PersonRepository personRepository;
 
     public void save(Admin admin){
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        admin.setPassword(encoder.encode(admin.getPassword()));
+        if(admin.getId()==null){
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            admin.setPassword(encoder.encode(admin.getPassword()));
+        }
         personRepository.save(admin);
     }
 
     public Optional<Admin> findAdminByEmail(String email){
         return Optional.ofNullable((Admin) personRepository.findByEmail(email));
+    }
+
+    public Optional<Person> findByEmail(String email){
+        return Optional.ofNullable(personRepository.findByEmail(email));
     }
 }

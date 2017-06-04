@@ -3,11 +3,15 @@ package com.app.patientcard.controllers;
 import com.app.patientcard.entities.Nurse;
 import com.app.patientcard.entities.Patient;
 import com.app.patientcard.services.PatientService;
+import com.app.patientcard.services.ValidationErrorBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -20,14 +24,20 @@ import java.util.Optional;
 public class PatientController {
     @Autowired
     private PatientService patientService;
+
     @PostMapping("/add")
-    public ResponseEntity<?> addNurse(@RequestBody Patient patient){
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'DOCTOR','NURSE')")
+    public ResponseEntity<?> addPatient(@Valid @RequestBody Patient patient, Errors errors){
         patient.setDateOfAdoption(ZonedDateTime.now());
-        patientService.save(patient);
-        if(Optional.ofNullable(patient.getId()).isPresent()){
-            return ResponseEntity.ok(patient);
-        }else {
-            return new ResponseEntity<Object>(HttpStatus.INTERNAL_SERVER_ERROR);
+        if(errors.hasErrors()){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ValidationErrorBuilder.fromBindingErrors(errors));
+        }else{
+            patientService.save(patient);
+            if(Optional.ofNullable(patient.getId()).isPresent()){
+                return ResponseEntity.ok(patient);
+            }else {
+                return new ResponseEntity<Object>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
         }
     }
 
