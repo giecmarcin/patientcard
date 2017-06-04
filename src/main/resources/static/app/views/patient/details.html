@@ -43,10 +43,10 @@
                                             <p class="input-group">
                                                 <input type="text" class="form-control"
                                                        datetime-picker="dd.MM.yyyy HH:mm"
-                                                       ng-model="patient.dayOfBirth" is-open="popup1DetailPatient.opened"/>
+                                                       ng-model="patient.dayOfBirth" is-open="popup1DetailPatient.opened" ng-disabled="disableInPatientDetails"/>
                                                 <span class="input-group-btn">
                                             <button type="button" class="btn btn-default"
-                                                    ng-click="open1DetailPatient()"><i
+                                                    ng-click="open1DetailPatient()" ng-disabled="disableInPatientDetails"><i
                                                     class="glyphicon glyphicon-calendar"></i></button>
                                         </span>
                                             </p>
@@ -57,7 +57,7 @@
                                         <label for="inputEmail" class="col-lg-2 control-label">Email</label>
                                         <div class="col-lg-10">
                                             <input class="form-control" id="inputEmail" placeholder="Email" type="text"
-                                                   ng-model="patient.email">
+                                                   ng-model="patient.email" ng-disabled="disableInPatientDetails">
                                         </div>
                                     </div>
                                 </fieldset>
@@ -69,7 +69,7 @@
                                         <label for="description" class="col-lg-2 control-label">Description</label>
                                         <div class="col-lg-10">
                         <textarea class="form-control" rows="3" id="description"
-                                  ng-model="patient.description"></textarea>
+                                  ng-model="patient.description" ng-disabled="disableInPatientDetails"></textarea>
                                             <!--<span class="help-block">A longer block of help text that breaks onto a new line and may extend beyond one line.</span>-->
                                         </div>
                                     </div>
@@ -82,13 +82,13 @@
                                     <div class="form-group">
                                         <label class="col-lg-2 control-label">Date of departure</label>
                                         <div class="col-md-4">
-                                            <p class="input-group">
+                                            <p class="input-group" ng-disabled="disableInPatientDetails">
                                                 <input type="text" class="form-control"
                                                        datetime-picker="dd.MM.yyyy HH:mm"
-                                                       ng-model="patient.dateOfDeparture" is-open="popup2DetailPatient.opened"/>
+                                                       ng-model="patient.dateOfDeparture" is-open="popup2DetailPatient.opened" ng-disabled="disableInPatientDetails"/>
                                                 <span class="input-group-btn">
                                             <button type="button" class="btn btn-default"
-                                                    ng-click="open2DetailPatient()"><i
+                                                    ng-click="open2DetailPatient()" ng-disabled="disableInPatientDetails"><i
                                                     class="glyphicon glyphicon-calendar"></i></button>
                                         </span>
                                             </p>
@@ -103,9 +103,9 @@
                         <form class="form-horizontal">
                             <div class="col-md-6">
                                 <fieldset>
-                                    <div class="form-group">
+                                    <div class="form-group" ng-show="showInPatientDetails">
                                         <label for="name" class="col-lg-2 control-label">Choose doctors</label>
-                                        <div class="col-lg-10">
+                                        <div class="col-lg-10" ng-disabled="disableInPatientDetails">
                                             <multiple-autocomplete
                                                     ng-model="patient.doctors"
                                                     object-property="lastName"
@@ -131,7 +131,7 @@
             <div class="row">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <a href="" ng-click="addObservation()">New</a>
+                        <a href="" ng-click="addObservation()" ng-disabled="disableInPatientDetails" ng-show="showInPatientDetails">New</a>
                         <br/>
                         <div class="panel-group" id="accordion"
                              ng-repeat="observation in patient.observations | orderBy:'-zonedDateTime'">
@@ -159,7 +159,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="panel panel-default">
-                            <div class="panel-heading"><a href="" ng-click="addMedicine()">Add medicine </a></div>
+                            <div class="panel-heading"><a href="" ng-click="addMedicine()" ng-disabled="disableInPatientDetails" ng-show="showInPatientDetails">Add medicine </a></div>
                             <div class="panel-body">
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered table-hover">
@@ -199,7 +199,7 @@
                     <br/>
                     <div class="row">
                         <div class="panel panel-default">
-                            <div class="panel-heading"><a href="" ng-click="showDialogTemperature()">Add temperature </a></div>
+                            <div class="panel-heading"><a href="" ng-click="showDialogTemperature()" ng-disabled="disableInPatientDetails" ng-show="showInPatientDetails">Add temperature </a></div>
                             <div class="panel-body">
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered table-hover">

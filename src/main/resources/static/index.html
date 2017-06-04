@@ -41,16 +41,16 @@
                         </ul>
                     </li>
 
-                    <li><a href="#!/"><i class="fa fa-shield"></i>Home</a></li>
+                    <li><a href="#!/welcome"><i class="fa fa-shield"></i>Home</a></li>
                     <li class="dropdown">
-                        <a id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <a id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" ng-show="showManagementLink">
                             Management
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <li><a href="#!/doctors">Doctors</a></li>
-                            <li><a href="#!/patients">Patients</a></li>
-                            <li><a href="#!/nurses">Nurses</a></li>
+                            <li><a href="#!/doctors" ng-show="showDoctorsLink">Doctors</a></li>
+                            <li><a href="#!/patients" ng-show="showPatientsLink">Patients</a></li>
+                            <li><a href="#!/nurses" ng-show="showNursesLink">Nurses</a></li>
                         </ul>
                     </li>
                 </ul>

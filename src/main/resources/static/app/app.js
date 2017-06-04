@@ -95,7 +95,82 @@ app.run(function($localStorage, $sessionStorage, $rootScope, LoginService, $loca
 
     $rootScope.$on("$locationChangeStart", function(event, next, current) {
         checkUserInLocalStorage();
+        setFields();
     });
+
+    $rootScope.showManagementLink = false;
+    $rootScope.showDoctorsLink = false;
+    $rootScope.showPatientsLink = false;
+    $rootScope.showNursesLink = false;
+    $rootScope.disableInPatientDetails = true;
+    $rootScope.showInPatientDetails = false;
+
+    $rootScope.$on('$routeChangeSuccess', function (e, current, pre) {
+         if($sessionStorage.currentUser!=undefined){
+             setFields();
+             var currentPath = current.$$route.originalPath;
+             var role = $sessionStorage.currentUser.role;
+             if(angular.equals(role, "PATIENT")){
+                $location.path('patients/details/' + $sessionStorage.currentUser.id);
+             }
+             else if(angular.equals(role,"ADMIN")){
+                //Do nothing
+             }else if(angular.equals(role,"DOCTOR")){
+                 if(angular.equals(currentPath,"/doctors")
+                 ||(angular.equals(currentPath,"/doctors/add")
+                 ||(angular.equals(currentPath,"/nurses"))
+                 ||(angular.equals(currentPath,"/nurses/add")))
+                 ){
+                     $location.path('/welcome');
+                 }
+             }else if(angular.equals(role,"NURSE")){
+                 if(angular.equals(currentPath,"/doctors")
+                 ||(angular.equals(currentPath,"/doctors/add")
+                 ||(angular.equals(currentPath,"/nurses"))
+                 ||(angular.equals(currentPath,"/nurses/add")))
+                 ){
+                     $location.path('/welcome');
+                 }
+             }
+         }
+    });
+
+    function setFields(){
+         if($sessionStorage.currentUser!=undefined){
+            var role = $sessionStorage.currentUser.role;
+            if(angular.equals(role,"ADMIN")){
+                $rootScope.showManagementLink = true;
+                $rootScope.showDoctorsLink = true;
+                $rootScope.showPatientsLink = true;
+                $rootScope.showNursesLink = true;
+                $rootScope.disableInPatientDetails = false;
+                $rootScope.showInPatientDetails = true;
+            }else if(angular.equals(role,"DOCTOR")){
+                $rootScope.showManagementLink = true;
+                $rootScope.showDoctorsLink = false;
+                $rootScope.showPatientsLink = true;
+                $rootScope.showNursesLink = false;
+                $rootScope.disableInPatientDetails = false;
+                $rootScope.showInPatientDetails = true;
+            }else if(angular.equals(role,"NURSE")){
+                $rootScope.showManagementLink = true;
+                $rootScope.showDoctorsLink = false;
+                $rootScope.showPatientsLink = true;
+                $rootScope.showNursesLink = false;
+                $rootScope.disableInPatientDetails = false;
+                $rootScope.showInPatientDetails = true;
+            }else if(angular.equals(role,"PATIENT")){
+                $rootScope.showManagementLink = false;
+                $rootScope.showDoctorsLink = false;
+                $rootScope.showPatientsLink = false;
+                $rootScope.showNursesLink = false;
+                $rootScope.disableInPatientDetails = true;
+                $rootScope.showInPatientDetails = false;
+
+            }
+         }
+    }
+
 app.directive('formattedDate', function(dateFilter) {
   return {
     require: 'ngModel',
