@@ -8,9 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Transactional
@@ -18,9 +16,15 @@ public class DoctorService {
     @Autowired
     private DoctorRepository doctorRepository;
 
+    @Autowired
+    private MailClient mailClient;
+
     public void save(Doctor doctor){
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        doctor.setPassword(encoder.encode(doctor.getPassword()));
+        if(doctor.getId()==null){
+            String message = "Your password is: " + doctor.getPassword();
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            doctor.setPassword(encoder.encode(doctor.getPassword()));
+        }
         doctor.setRole(Role.DOCTOR);
         doctorRepository.save(doctor);
     }
@@ -34,5 +38,4 @@ public class DoctorService {
     public Optional<Doctor> findOne(long id){
         return Optional.ofNullable(doctorRepository.findOne(id));
     }
-
 }
