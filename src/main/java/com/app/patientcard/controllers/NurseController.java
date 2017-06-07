@@ -1,5 +1,6 @@
 package com.app.patientcard.controllers;
 
+import com.app.patientcard.entities.Doctor;
 import com.app.patientcard.entities.Nurse;
 import com.app.patientcard.services.NurseService;
 import com.app.patientcard.services.ValidationErrorBuilder;
@@ -48,6 +49,16 @@ public class NurseController {
         if (!allNurses.isEmpty()) {
             return ResponseEntity.ok(allNurses);
         } else {
+            return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
+        }
+    }
+
+    @GetMapping("/id/{id}")
+    public ResponseEntity<?> findOne(@PathVariable Long id){
+        Optional<Nurse> nurseOpt = nurseService.findOne(id);
+        if(nurseOpt.isPresent()){
+            return ResponseEntity.ok(nurseOpt.get());
+        }else {
             return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
         }
     }

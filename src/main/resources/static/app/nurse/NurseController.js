@@ -1,5 +1,5 @@
 angular.module('app').controller('NurseController', function ($rootScope, $scope, $filter, NurseService, $location,
-dialogs) {
+dialogs, $routeParams) {
     //$scope.dateOfBirth = $filter("date")(Date.now(), 'yyyy-MM-dd');
     $scope.dateOfBirth = new Date();
     $scope.newNurse = {};
@@ -24,6 +24,25 @@ dialogs) {
             })
     }
     loadAllNurses();
+
+    var  loadNurseData = function(id){
+            NurseService
+                .findOne(id)
+                .then(function (response) {
+                  $scope.newNurse = response.data;
+                  $scope.newNurse.dayOfBirth = new Date($scope.newNurse.dayOfBirth);
+                }, function(response){
+                  //error callback
+                  dialogs.error('Error', 'Problem with download data.');
+                })
+    }
+    $scope.disabledFields = false;
+    if($routeParams.id!=undefined){
+        loadNurseData($routeParams.id);
+         $scope.disabledFields = true;
+    }else{
+        $scope.disabledFields = false;
+    }
     $scope.addNurse = function () {
         NurseService
             .add($scope.newNurse)
@@ -51,5 +70,6 @@ dialogs) {
 
     function clearNurseFields(){
         $scope.newNurse = {};
+        $scope.disabledFields = false;
     }
 });

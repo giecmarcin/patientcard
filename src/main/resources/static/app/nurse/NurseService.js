@@ -24,4 +24,15 @@ angular.module('app').service('NurseService', function($http) {
             return response;
         });
     }
+    this.findOne = function (id) {
+        var url = '/api/nurses/id/' + id;
+        return $http({
+            method: "GET",
+            url: url
+        }).then(function successCallback(response) {
+            return response;
+        }, function errorCallback(response) {
+           return response;
+        });
+    }
 });

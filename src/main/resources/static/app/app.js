@@ -40,6 +40,10 @@ app.config(function($routeProvider) {
             templateUrl: '/app/views/nurse/add.html',
             controller: 'NurseController'
         })
+        .when('/nurses/add/:id', {
+            templateUrl: '/app/views/nurse/add.html',
+            controller: 'NurseController'
+        })
         .when('/patients', {
             templateUrl: '/app/views/patient/patients.html',
             controller: 'PatientsController'
