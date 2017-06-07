@@ -28,6 +28,10 @@ app.config(function($routeProvider) {
             templateUrl: '/app/views/doctor/add.html',
             controller: 'DoctorsController'
         })
+        .when('/doctors/add/:id', {
+            templateUrl: '/app/views/doctor/add.html',
+            controller: 'DoctorsController'
+        })
         .when('/nurses', {
             templateUrl: '/app/views/nurse/nurses.html',
             controller: 'NurseController'

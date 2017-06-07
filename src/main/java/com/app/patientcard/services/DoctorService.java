@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -30,4 +31,8 @@ public class DoctorService {
         source.forEach(doctors::add);
         return doctors;
     }
+    public Optional<Doctor> findOne(long id){
+        return Optional.ofNullable(doctorRepository.findOne(id));
+    }
+
 }

@@ -1,5 +1,5 @@
 angular.module('app').controller('DoctorsController', function ($rootScope, $scope, $filter, DoctorService, $location,
-dialogs) {
+dialogs, $routeParams) {
     //$scope.dateOfBirth = $filter("date")(Date.now(), 'yyyy-MM-dd');
     $scope.dateOfBirth;
     $scope.newDoctor = {};
@@ -24,6 +24,25 @@ dialogs) {
             })
     }
     loadAllDoctors();
+    var  loadDoctorData = function(id){
+            DoctorService
+                .findOne(id)
+                .then(function (response) {
+                  $scope.newDoctor = response.data;
+                  $scope.newDoctor.dayOfBirth = new Date($scope.newDoctor.dayOfBirth);
+                }, function(response){
+                  //error callback
+                  dialogs.error('Error', 'Problem with download data.');
+                })
+    }
+    $scope.disabledFields = false;
+    if($routeParams.id!=undefined){
+        loadDoctorData($routeParams.id);
+         $scope.disabledFields = true;
+    }else{
+        $scope.disabledFields = false;
+    }
+
     $scope.addDoctor = function () {
         // var date = {
         //     "dayOfBirth":$scope.dateOfBirth
@@ -56,5 +75,6 @@ dialogs) {
 
     function clearDoctorFields(){
         $scope.newDoctor = {};
+        $scope.disabledFields = false;
     }
 });

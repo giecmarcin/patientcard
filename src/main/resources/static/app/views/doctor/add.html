@@ -36,14 +36,14 @@
                 <label for="inputEmail" class="col-lg-2 control-label">Email</label>
                 <div class="col-lg-10">
                     <input class="form-control" id="inputEmail" placeholder="Email" type="text"
-                           ng-model="newDoctor.email">
+                           ng-model="newDoctor.email" ng-disabled="disabledFields">
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputPassword" class="col-lg-2 control-label">Password</label>
                 <div class="col-lg-10">
                     <input class="form-control" id="inputPassword" placeholder="Password" type="password"
-                           ng-model="newDoctor.password">
+                           ng-model="newDoctor.password" ng-disabled="disabledFields">
                 </div>
             </div>
             <div class="form-group">

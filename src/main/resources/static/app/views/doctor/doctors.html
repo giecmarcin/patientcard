@@ -30,6 +30,7 @@
                         <th>{{ d.dayOfBirth | date :  'dd.MM.yyyy' }}</th>
                         <td>{{d.salary}}</td>
                         <td>
+                            <a href="#!/doctors/add/{{d.id}}" role="button">Edit</a>
                             <a href="#!" role="button">Delete</a>
                         </td>
                     </tr>
