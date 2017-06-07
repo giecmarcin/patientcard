@@ -220,4 +220,17 @@ $location, $routeParams, ModalService, dialogs, PatientService, $filter, DoctorS
             });
     }
 
+    $scope.makeReport = function(){
+            PatientService
+                .makeReport($routeParams.id)
+                .then(function (response) {
+                    if(response.status==200){
+                        loadPatientData($routeParams.id);
+                        dialogs.notify('Information', 'Report has been generated.');
+                    }else{
+                        dialogs.error('Problem', 'Problem with generate report.');
+                    }
+                })
+    }
+
 });

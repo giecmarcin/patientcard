@@ -36,4 +36,15 @@ angular.module('app').service('PatientService', function($http) {
            return response;
         });
     }
+    this.makeReport = function (id) {
+        var url = '/api/reports/patients/id/' + id;
+        return $http({
+            method: "GET",
+            url: url
+        }).then(function successCallback(response) {
+            return response;
+        }, function errorCallback(response) {
+           return response;
+        });
+    }
 });
