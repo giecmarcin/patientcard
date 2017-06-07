@@ -29,7 +29,11 @@ public class NurseController {
         if (errors.hasErrors()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ValidationErrorBuilder.fromBindingErrors(errors));
         } else {
-            nurseService.save(nurse);
+            try{
+                nurseService.save(nurse);
+            }catch (Exception ex){
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ValidationErrorBuilder.fromBindingErrors(errors));
+            }
             if (Optional.ofNullable(nurse.getId()).isPresent()) {
                 return ResponseEntity.ok(nurse);
             } else {

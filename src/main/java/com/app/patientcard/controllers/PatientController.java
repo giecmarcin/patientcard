@@ -32,7 +32,11 @@ public class PatientController {
         if(errors.hasErrors()){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ValidationErrorBuilder.fromBindingErrors(errors));
         }else{
-            patientService.save(patient);
+            try{
+                patientService.save(patient);
+            }catch (Exception ex){
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ValidationErrorBuilder.fromBindingErrors(errors));
+            }
             if(Optional.ofNullable(patient.getId()).isPresent()){
                 return ResponseEntity.ok(patient);
             }else {

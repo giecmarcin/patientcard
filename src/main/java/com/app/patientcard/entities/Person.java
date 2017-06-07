@@ -18,8 +18,9 @@ public abstract class Person {
     @NotEmpty
     @Size(min=3, max = 30)
     private String lastName;
+
+    @NotEmpty
     @Email
-    @Column(unique = true)
     private String email;
     @NotEmpty
     private String password;
@@ -57,6 +58,7 @@ public abstract class Person {
         this.lastName = lastName;
     }
 
+    @Column(unique = true)
     public String getEmail() {
         return email;
     }
