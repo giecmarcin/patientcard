@@ -198,4 +198,26 @@ $location, $routeParams, ModalService, dialogs, PatientService, $filter, DoctorS
             }
         }
     }
+    $scope.addPressure = function(){
+            ModalService.showModal({
+                templateUrl: '/app/views/modal/PressureModal.html',
+                controller: "PressureModalController"
+            }).then(function(modal) {
+                modal.element.modal();
+                modal.closed.then(function(obj) {
+                    if (obj) {
+                        var pressureObj = {
+                            "pressureSystolic": obj.pressureSystolic,
+                            "pressureDiastolic": obj.pressureDiastolic,
+                            "zonedDateTime": obj.time
+                        }
+                        $scope.patient.pressures.push(pressureObj);
+                        save($scope.patient);
+                    } else {
+                        dialogs.error('Error', 'Problem with adding medicine.');
+                    }
+                });
+            });
+    }
+
 });

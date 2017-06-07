@@ -13,7 +13,8 @@ import java.time.ZonedDateTime;
 @Entity
 public class Pressure {
     private Long id;
-    private double pressure;
+    private double pressureSystolic; //120
+    private double pressureDiastolic; //80
     private ZonedDateTime zonedDateTime;
 
     public Pressure() {
@@ -29,12 +30,20 @@ public class Pressure {
         this.id = id;
     }
 
-    public double getPressure() {
-        return pressure;
+    public double getPressureSystolic() {
+        return pressureSystolic;
     }
 
-    public void setPressure(double pressure) {
-        this.pressure = pressure;
+    public void setPressureSystolic(double pressureSystolic) {
+        this.pressureSystolic = pressureSystolic;
+    }
+
+    public double getPressureDiastolic() {
+        return pressureDiastolic;
+    }
+
+    public void setPressureDiastolic(double pressureDiastolic) {
+        this.pressureDiastolic = pressureDiastolic;
     }
 
     public ZonedDateTime getZonedDateTime() {

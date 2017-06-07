@@ -89,7 +89,7 @@ public class Patient extends Person {
 
     //@Fetch(org.hibernate.annotations.FetchMode.SELECT)
     @LazyCollection(LazyCollectionOption.FALSE)
-    @OneToMany()
+    @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "patient_id")
     public List<Pressure> getPressures() {
         return pressures;

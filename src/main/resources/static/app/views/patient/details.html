@@ -226,7 +226,29 @@
         <div role="tabpanel" class="tab-pane" id="pressure">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    Pressure
+                    <div class="row">
+                        <div class="panel panel-default">
+                            <div class="panel-heading"><a href="" ng-click="addPressure()" ng-disabled="disableInPatientDetails" ng-show="showInPatientDetails">Add pressure </a></div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>Day</th>
+                                            <th>Pressure</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="p in patient.pressures | orderBy:'-zonedDateTime'">
+                                            <td>{{p.zonedDateTime | date :  'dd.MM.yyyy hh:mm'}}</td>
+                                            <td>{{p.pressureSystolic}}/{{p.pressureDiastolic}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

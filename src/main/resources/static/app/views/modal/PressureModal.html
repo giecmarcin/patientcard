@@ -1,0 +1,49 @@
+<div class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">Pressure</h4>
+            </div>
+            <div class="modal-body">
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-lg-9 control-label">Pressure systolic</label>
+                        <div class="col-lg-10">
+                            <input class="form-control" placeholder="120" type="number" step="any"
+                                   ng-model="obj.pressureSystolic">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-9 control-label">Pressure diastolic</label>
+                        <div class="col-lg-10">
+                            <input class="form-control" placeholder="80" type="text"
+                                   ng-model="obj.pressureDiastolic">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-9 control-label">Time</label>
+                        <div class="col-lg-10">
+                            <p class="input-group">
+                                <input type="text" class="form-control"
+                                       datetime-picker="dd.MM.yyyy HH:mm"
+                                       ng-model="obj.time" is-open="popup4.opened"/>
+                                <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default"
+                                                    ng-click="open4()"><i
+                                                    class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+                            </p>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="modal-footer">
+                <button type="button" ng-click="ok()" class="btn btn-primary">Ok</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
